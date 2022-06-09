@@ -93,8 +93,9 @@ export default {
 
 .container
     width: 100%
-    height: 675px
+    height: auto
     margin: 0
+    padding-bottom: 50px
     .items
         @include center($direction: column)
         padding: 50px 25px 10px 25px
@@ -125,7 +126,7 @@ export default {
     .container
         .items
             padding: 50px 25px 50px 25px
-            height: 990px
+
             .cards
                 display: flex
                 justify-content: center
@@ -137,7 +138,6 @@ export default {
       width: 100%
     .items
         @include center($direction: column)
-        height: 880px
         .text-header
             font-size: 30px;
             letter-spacing: 4px;
@@ -164,7 +164,6 @@ export default {
 @media screen and (max-width: 768px)
     .container
         .items
-            height: 990px
             .cards
                 display: flex
                 justify-content: center

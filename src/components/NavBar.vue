@@ -90,6 +90,8 @@ $link-hover-color: #00ccbb
 body
   font-family: "Montserrat"
   width: 100%
+  margin: 0
+  padding: 0
 .navigation
   height: $nav-height
   background: $nav-background
@@ -177,13 +179,16 @@ nav
   top: 0
   right: 0
   background: $nav-background
-  height: $nav-height - 10
-  width: $nav-height - 10
+  height: auto
+  width: auto
 
 
 @media only screen and (max-width: $breakpoint)
   .nav-mobile
     display: block
+    position: absolute
+    top: 16px
+    right: 16px
   .phone-number
     background-color: white
     color: black
