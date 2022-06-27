@@ -2,27 +2,36 @@
   <div
     ref="card"
     name="card-container"
-    class="container"
-    :style="cardStyles.main"
+    :class="{ 'card-container': !inverse, 'inverse-card-container': inverse }"
   >
-    <div class="card-title" :style="'color:' + cardStyles.textColor + ';'">
-      <p>{{ title }}</p>
-    </div>
-    <div>
+    <div v-if="bkgIcon">
       <img
+        id="white-icon"
         ref="icon"
         name="card-icon"
         class="bkg-icon"
-        :src="icon"
-        :alt="icon"
+        :src="whiteIcon"
+        :alt="whiteIcon"
+      />
+      <img
+        id="yellow-icon"
+        ref="icon"
+        name="card-icon"
+        class="bkg-icon"
+        :src="yellowIcon"
+        :alt="yellowIcon"
       />
     </div>
-    <div
-      v-show="content"
-      class="card-content"
-      :style="'color:' + cardStyles.textColor + ';'"
-    >
-      <p>{{ content }}</p>
+    <div class="text">
+      <div :class="{ 'card-title': !inverse, 'inverse-card-title': inverse }">
+        <p>{{ title }}</p>
+      </div>
+      <div
+        v-show="content"
+        :class="{ 'card-content': !inverse, 'inverse-card-content': inverse }"
+      >
+        <p>{{ content }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -36,90 +45,24 @@ export default {
     content: {
       type: String,
     },
-    cardStyles: {
-      type: Object,
-    },
     bkgIcon: {
       type: String,
+      default: null,
+    },
+    inverse: {
+      type: Boolean,
+      default: false,
     },
   },
-  created() {
-    window.addEventListener("resize", this.windowListener);
-  },
-  mounted() {
-    // code for handling resize...
-    const cards = document.getElementsByName("card-container");
-    const icons = document.getElementsByName("card-icon");
-
-    // console.log(icons);
-    //   console.log(window.target.innerWidth, this.$refs.icon);
-    if (window.innerWidth <= 500) {
-      for (let i = 0; i < cards.length; i++) {
-        // console.log(cards[i]);
-        icons[i].style.width = "118px";
-        icons[i].style.height = "118px";
-        icons[i].style.left = "120px";
-        icons[i].style.top = "30px";
-        cards[i].style.height = "180px";
-      }
-      const howItWorksItems = document.getElementsByName("how-it-works-items");
-      // console.log(howItWorksItems);
-      howItWorksItems[0].style.padding = "0px 0px 0px 0px";
-      howItWorksItems[0].style.margin = "0px 0px 0px 0px";
-    } else {
-      for (let i = 0; i < cards.length; i++) {
-        icons[i].style.width = "188px";
-        icons[i].style.height = "188px";
-        icons[i].style.left = "90px";
-        icons[i].style.top = "50px";
-        cards[i].style.height = "293px";
-      }
-      const howItWorksItems = document.getElementsByName("how-it-works-items");
-      // console.log(howItWorksItems);
-      howItWorksItems[0].style.padding = "50px 25px 10px 25px";
-    }
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.windowListener);
-  },
-  methods: {
-    windowListener(window) {
-      // code for handling resize...
-      const cards = document.getElementsByName("card-container");
-      const icons = document.getElementsByName("card-icon");
-
-      // console.log(icons);
-      //   console.log(window.target.innerWidth, this.$refs.icon);
-      if (window.target.innerWidth <= 500) {
-        for (let i = 0; i < cards.length; i++) {
-          icons[i].style.width = "118px";
-          icons[i].style.height = "118px";
-          icons[i].style.left = "120px";
-          icons[i].style.top = "30px";
-          cards[i].style.height = "180px";
-        }
-        const howItWorksItems =
-          document.getElementsByName("how-it-works-items");
-        // console.log(howItWorksItems);
-        howItWorksItems[0].style.padding = "0px 0px 0px 0px";
-      } else {
-        for (let i = 0; i < cards.length; i++) {
-          icons[i].style.width = "188px";
-          icons[i].style.height = "188px";
-          icons[i].style.left = "90px";
-          icons[i].style.top = "50px";
-          cards[i].style.height = "293px";
-        }
-        const howItWorksItems =
-          document.getElementsByName("how-it-works-items");
-        // console.log(howItWorksItems);
-        howItWorksItems[0].style.padding = "50px 25px 10px 25px";
-      }
-    },
-  },
+  methods: {},
   computed: {
-    icon() {
-      return require("@/assets/" + this.bkgIcon);
+    whiteIcon() {
+      return require("@/assets/bkg/how-we-do-it-cards/white-icons/" +
+        this.bkgIcon);
+    },
+    yellowIcon() {
+      return require("@/assets/bkg/how-we-do-it-cards/yellow-icons/" +
+        this.bkgIcon);
     },
   },
 };
@@ -128,8 +71,53 @@ export default {
 <style lang="sass" scoped>
 @import url("https://fonts.googleapis.com/css?family=Work+Sans&display=swap")
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap")
+@import "@/styles.sass";
+.card-container
+    @include center(column)
+    width: 366px;
+    height: 293px;
+    border-radius: 40px;
+    filter: drop-shadow(0px 10px 11.5px rgba(0,0,0,0.09));
+    background-color: #00ccbb
+    border: 3px solid #ffffff;
 
-.container
+    &:hover
+      background-color: #ffffff;
+      border: 3px solid #ffc400;
+      .text
+        .card-title, .card-content
+          color: #424142
+      #white--icon
+        display: none
+      #yellow-icon
+        display: block
+    #yellow-icon
+      display: none
+    .text
+      @include center(column)
+      height: 100%
+      .card-title
+          font-size: 24px;
+          color: #fafbfc;
+          font-family: "Raleway";
+          font-weight: 700;
+          text-align: center
+      .card-content
+          text-align: center;
+          font-size: 15px;
+          color: #fafbfc;
+          font-weight: 400;
+          font-family: "Work Sans";
+    .bkg-icon
+        width: 188px;
+        height: 188px;
+        position: absolute;
+        z-index: 10
+        top: 50px;
+        left: 90px;
+
+// inverse card styles
+.inverse-card-container
     display: flex
     flex-direction: column
     justify-content: center
@@ -138,18 +126,39 @@ export default {
     height: 293px;
     border-radius: 40px;
     filter: drop-shadow(0px 10px 11.5px rgba(0,0,0,0.09));
-    background-color: #00ccbb;
+    background: radial-gradient(circle at center, #ffffff 0%, #e9e9e9 100%);
     border: 3px solid #ffffff;
-    .card-title
-        font-size: 24px;
-        color: #fafbfc;
-        font-family: "Raleway";
-    .card-content
-        margin-top: -5%
-        font-size: 15px;
-        color: #fafbfc;
-        font-weight: 500;
-        font-family: "Work Sans";
+
+    &:hover
+      background:  #00ccbb;
+      border: 3px solid #ffc400;
+      .text
+        .inverse-card-title, .inverse-card-content
+          color: white
+      #white--icon
+        display: none
+      #yellow-icon
+        display: block
+    #yellow-icon
+      display: none
+    .text
+      @include center(column)
+      height: auto
+      .inverse-card-title
+          font-size: 24px;
+          height: 80px
+          color: #424142
+          font-family: "Raleway";
+          font-weight: 700;
+          line-height: ((2*80px)-24px)/2;
+          text-align: right;
+      .inverse-card-content
+          text-align: center;
+          padding: 0px 16px;
+          font-size: 15px;
+          color: #424142
+          font-weight: 400;
+          font-family: "Work Sans";
     .bkg-icon
         width: 188px;
         height: 188px;
@@ -159,11 +168,13 @@ export default {
         left: 90px;
 
 @media screen and (max-width: 500px)
+  .card-container
+    height: 180px
     .bkg-icon
-        width: 10px;
-        height: 10px;
+        width: 118px;
+        height: 118px;
         position: absolute;
         z-index: 10
-        top: 50px;
-        left: 90px;
+        top: 30px;
+        left: 120px;
 </style>

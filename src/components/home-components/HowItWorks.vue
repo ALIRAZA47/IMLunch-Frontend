@@ -2,6 +2,7 @@
   <div class="container">
     <div class="items" ref="howItWorksItems" name="how-it-works-items">
       <div class="title">
+        <img src="@/assets/logo.png" alt="" style="width: 50px; height: 27px" />
         <p class="text-header">How it Works</p>
         <img class="separator" src="@/assets/separator.svg" alt="Separator" />
       </div>
@@ -9,8 +10,7 @@
         <BaseCard
           v-for="(cardTitle, i) in cardsData"
           :key="i"
-          :cardStyles="cardStyles[i.toString()]"
-          :bkgIcon="'bkg/how-we-do-it-cards/card-' + i.toString() + '.svg'"
+          :bkgIcon="'card-' + i.toString() + '.svg'"
           :title="cardTitle.title"
           :content="cardTitle.content"
         />
@@ -99,14 +99,6 @@ export default {
     .items
         @include center($direction: column)
         padding: 50px 25px 10px 25px
-        .text-header
-            font-size: 30px;
-            letter-spacing: 4px;
-            color: #212121;
-            font-family: "Raleway";
-        .separator
-            width: 200px
-            margin-top: -20px
         .cards
             @include center($direction: row)
             margin-top: 50px
@@ -121,8 +113,16 @@ export default {
         .title
             @include center($direction: column)
             width: 250px
+            .text-header
+              font-size: 30px;
+              letter-spacing: 4px;
+              color: #212121;
+              font-family: "Raleway";
+            .separator
+                width: 200px
+                margin-top: -20px
 
-@media screen and (max-width: 1300px)
+@media screen and (max-width: 1300px) and (min-width: 768px)
     .container
         .items
             padding: 50px 25px 50px 25px
@@ -133,11 +133,23 @@ export default {
                 flex-wrap: wrap
                 margin:auto
                 align-items: stretch
+
+@media screen and (max-width: 768px)
+    .container
+        .items
+            .cards
+                display: flex
+                justify-content: center
+                flex-wrap: wrap
+                margin:auto
+                align-items: stretch
+
 @media screen and (max-width: 500px)
     .container
       width: 100%
     .items
         @include center($direction: column)
+        padding: 0px
         .text-header
             font-size: 30px;
             letter-spacing: 4px;
@@ -160,14 +172,4 @@ export default {
         z-index: 10
         top: 50px;
         left: 90px;
-
-@media screen and (max-width: 768px)
-    .container
-        .items
-            .cards
-                display: flex
-                justify-content: center
-                flex-wrap: wrap
-                margin:auto
-                align-items: stretch
 </style>

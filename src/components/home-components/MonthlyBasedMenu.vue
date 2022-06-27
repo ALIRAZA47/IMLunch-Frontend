@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="monthly-based-menu">
     <img
       src="@/assets/bkg/monthly-based-menu-bg2.png"
       alt="monthly-based-menu-bg2.png"
@@ -39,20 +39,12 @@
                     </tr>
                     <tr
                       v-for="(dish, index) in menu['week' + week]['dishes']"
-                      :key="dish"
+                      :key="index"
                     >
                       <MenuItem
-                        :dish="dish"
-                        :dishPicture="
-                          'menu/dishes/week-' +
-                          week +
-                          '/dish-' +
-                          (index + 1) +
-                          '.png'
-                        "
-                        :borderColor="
-                          'border-color: ' + menu['week' + week].borderColor
-                        "
+                        :dish="dish.name"
+                        :dishPicture="dish.image"
+                        :borderColor="menu['week' + week].borderColor"
                       />
                     </tr>
                   </div>
@@ -71,55 +63,22 @@
 <script>
 import MenuItem from "../MenuItem.vue";
 import WeekDay from "@/components/WeekDay.vue";
+// import { mapState } from "vuex";
+import store from "@/store";
 export default {
   components: { WeekDay, MenuItem },
+  mounted() {
+    //  get data from backend running at port 5000
+    store.dispatch("fetchMenuData");
+    // console.log(this.menu);
+  },
   data() {
     return {
       days: ["Monday", "Tuesday", "Wednessday", "Thursday", "Friday"],
-      menu: {
-        week1: {
-          borderColor: "#37b2a4",
-          dishes: [
-            "Chicken Manchorian",
-            "Curry Pakora",
-            "Chicken Haleem",
-            "Chicken Karhai",
-            "Chicken Biryani",
-          ],
-        },
-        week2: {
-          borderColor: "#ffc400",
-          dishes: [
-            "Chicken Chilli Dry",
-            "Palak Paneer",
-            "Aloo / Chicken Paratha",
-            "Black Pepper Karhai",
-            "Chicken Pulao",
-          ],
-        },
-        week3: {
-          borderColor: "#37b2a4",
-          dishes: [
-            "Black Pepper Chicken",
-            "Daal Maash",
-            "BBQ",
-            "Anda Kofta",
-            "Chicken Biryani",
-          ],
-        },
-        week4: {
-          borderColor: "#ffc400",
-          dishes: [
-            "Chicken Manchorian",
-            "Palak Paneer",
-            "Aloo / Chicken Paratha",
-            "Chicken Korma",
-            "Chicken Daal Chana with Rice",
-          ],
-        },
-      },
+      menu: this.$store.state.menu,
     };
   },
+  methods: {},
 };
 </script>
 
@@ -152,11 +111,11 @@ export default {
     .contents
         position: relative
         color: white
-        padding: 100px
+        padding: 10% 0
         .header
             paading: 0
             margin: 0
-            width: 100%
+            width: auto
             @include center($direction: column)
             align-items: center
             .title

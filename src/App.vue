@@ -1,23 +1,14 @@
 <template>
   <div id="app" class="components">
-    <Navbar />
-    <AcceptOrders />
-    <HowItWorks />
-    <MonthlyBasedMenu />
+    <HomeView />
   </div>
 </template>
 <script>
-import Navbar from "@/components/NavBar.vue";
-import AcceptOrders from "@/components/home-components/AcceptOrders.vue";
-import HowItWorks from "@/components/home-components/HowItWorks.vue";
-import MonthlyBasedMenu from "./components/home-components/MonthlyBasedMenu.vue";
+import HomeView from "@/views/HomeView.vue";
 export default {
   name: "App",
   components: {
-    Navbar,
-    AcceptOrders,
-    HowItWorks,
-    MonthlyBasedMenu,
+    HomeView,
   },
 };
 </script>

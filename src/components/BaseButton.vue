@@ -3,7 +3,7 @@
     <button
       v-bind="$attrs"
       class="button"
-      :class="buttonClass"
+      :class="primary ? '' : '-fill-primary'"
       v-on="$listeners"
     >
       <slot></slot>
@@ -15,8 +15,13 @@
 export default {
   inheritAttrs: false,
   props: {
-    buttonClass: {
+    type: {
       type: String,
+      default: "button",
+    },
+    primary: {
+      type: Boolean,
+      default: true,
     },
   },
 };
@@ -58,8 +63,8 @@ export default {
     .button + .button
         margin-left: 1em;
 
-    &.-fill-gray
-        background: rgba(0, 0, 0, 0.5);
+    &.-fill-praimry
+        background: #ooccbb
         color: #ffffff;
     &.-size-small
         height: 32px;

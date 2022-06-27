@@ -15,8 +15,8 @@
           <a id="nav-toggle" href="#!"><span></span></a>
         </div>
         <ul class="nav-list">
-          <li><a href="#!">Menu</a></li>
-          <li><a href="#!">Contact Us</a></li>
+          <li><a href="#monthly-based-menu">Menu</a></li>
+          <li><a href="#order-form">Contact Us</a></li>
 
           <li>
             <a class="phone-number" href="#!">
@@ -99,7 +99,7 @@ body
   elevation: 30px
   position: relative
   max-width: 100%
-  margin: 0 40px 0 40px
+  padding: 0 40px 0 40px
 %a-style
   color: $nav-font-color
   text-decoration: none
@@ -116,6 +116,7 @@ body
       @extend %a-style
 nav
   float: right
+  position: relative
   ul
     list-style: none
     margin: 0
@@ -181,6 +182,7 @@ nav
   background: $nav-background
   height: auto
   width: auto
+  z-index: 9
 
 
 @media only screen and (max-width: $breakpoint)
@@ -263,4 +265,5 @@ nav
 @media screen and (min-width: $breakpoint)
   .nav-list
     display: block !important
+    z-index: 1
 </style>

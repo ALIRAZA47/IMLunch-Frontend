@@ -1,127 +1,74 @@
 <template>
   <div class="container">
-    <div class="items-container">
-      <div class="container-image">
-        <img src="@/assets/home-plate.png" alt="Serving Plate" />
-      </div>
-      <div class="container-text">
-        <p class="header">
-          No luck having quality lunch at work? Say no more, We've got your
-          back.
-        </p>
-        <img class="separator" src="@/assets/separator.svg" alt="Separator" />
-        <p class="footer">
-          We create and deliver delectable meals for you, made from scratch with
-          fresh, healthy and locally grown ingredients.
-        </p>
-        <BaseButton class="btn">Submit</BaseButton>
-      </div>
+    <div class="container-text">
+      <p class="header">
+        No luck having quality lunch at work? Say no more, We've got your back.
+      </p>
+      <img class="separator" src="@/assets/separator.svg" alt="Separator" />
+      <p class="footer">
+        We create and deliver delectable meals for you, made from scratch with
+        fresh, healthy and locally grown ingredients.
+      </p>
+      <BaseButton class="btn"
+        ><a href="#order-form" style="text-decoration: none; color: #707070">
+          Submit</a
+        ></BaseButton
+      >
+    </div>
+    <div class="container-image">
+      <img src="@/assets/home-plate.png" alt="Serving Plate" />
     </div>
   </div>
 </template>
 
 <script>
 import BaseButton from "../BaseButton.vue";
-export default { components: { BaseButton } };
+export default {
+  components: { BaseButton },
+  methods: {},
+};
 </script>
 
 <style lang="sass" scoped>
 
-@import url("https://fonts.googleapis.com/css?family=Work+Sans&display=swap")
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap")
+@import "@/styles.sass";
 
 .container
-    margin-top: -17px
-    height: 632px
-    width: 100%
+    height: auto
     background-color: #00ccbb
-.items-container
-    display: flex
-    flex-direction: row
-    justify-content: space-around
+    @include center($direction: row)
+    justify-content: space-between
+    padding: 20px 40px 20px 40px
     .container-image
-        margin-left: 40px
-        position: absolute
-        right: 0
+        width: 40%
         img
-            width: 500px
-            height: 500px
+            min-width: 240px
+            min-height: 240px
+            height: 80%
+            width: 80%
     .container-text
-        margin: 0 40px 0 40px
+
         color: white
-        margin-top: 10%
-        width: 50%
-        position: absolute
-        left: 0
+        width: 60%
+        height: auto
         .header
             font-size: 45px
             font-family: "Work Sans";
-        .separator
-            margin-top: -100px
         .btn
             margin-top: 20px
             margin-bottom: 20px
 
 
-@media only screen and (max-width: 1190px)
+@media only screen and (max-width: 1100px)
     .container
-        height: 684px
-@media only screen and (max-width: 900px)
-    .container
-        height: 684px
-        display: table
-        width: 100%
-    .items-container
-        display: table-cell
-        vertical-align: middle
-        position: relative
-        .container-image
-            position: absolute
-            top: 0
-            left: 25%
-            img
-                width: 400px
-                height: 400px
+        flex-direction: column-reverse
+        justify-content: flex-start
         .container-text
             width: 100%
-            margin-top: 0
-            margin-left: 40px
-            font-family: "Montserrat"
-            .footer
-                margin-right: 80px
-                font-family: "Montserrat"
-            .header
-                margin-right: 80px
-                font-size: 30px
-                font-family: "Work Sans";
-@media only screen and (max-width: 580px)
-    .container
-        height: 684px
-        display: table
-        width: 100%
-    .items-container
-
-        display: table-cell
-        vertical-align: middle
-        position: relative
+            height: auto
         .container-image
-            margin-top: 8%
-            position: absolute
-            top: 0
-            left: 15%
             img
-                width: 250px
-                height: 250px
-        .container-text
-            width: 100%
-            margin-top: -20%
-            margin-left: 40px
-            .header
-                margin-right: 80px
-                font-size: 30px
-                font-family: "Work Sans";
-            .footer
-                font-size: 16px;
-                margin-right: 80px
-                font-family: "Montserrat"
+                // width: 100%
+                height: 100%
+// @media only screen and (max-width: 580px)
 </style>
